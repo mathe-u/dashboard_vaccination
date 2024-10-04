@@ -1,8 +1,8 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import json
-import folium
+#import json
+#import folium
 #from streamlit_folium import st_folium
 #import datetime
 
@@ -13,11 +13,11 @@ url_dataset = "https://raw.githubusercontent.com/mathe-u/datasets/refs/heads/mai
 st.set_page_config(layout='wide')
 st.title("Vacinação Piauí 2024")
 
-@st.cache_data
-def load_geo(url):
-    with open(url, 'r') as file: 
-        geo = json.load(file)
-        return geo
+#@st.cache_data
+#def load_geo(url):
+#    with open(url, 'r') as file: 
+#        geo = json.load(file)
+#        return geo
 
 @st.cache_data
 def load_data(url):
@@ -25,10 +25,10 @@ def load_data(url):
   df['dt_vacina'] = pd.to_datetime(df.dt_vacina)
   return df
 
-@st.cache_data
-def load_map():
-    mapa_pi = folium.Map(location=[-7.2370, -42.5426], tiles='cartodbpositron', zoom_start=6)
-    return mapa_pi
+#@st.cache_data
+#def load_map():
+#    mapa_pi = folium.Map(location=[-7.2370, -42.5426], tiles='cartodbpositron', zoom_start=6)
+#    return mapa_pi
 
 #municipios = json.load(open(url_json, 'r'))
 df = load_data(url_dataset)
