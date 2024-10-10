@@ -11,7 +11,7 @@ st.set_page_config(layout='wide')
 st.title("Vacinação Piauí 2024")
 
 # URLs dos arquivos de dados
-url_json = 'mun.geojson'
+url_json = "https://github.com/mathe-u/datasets/blob/5ff042980d5b956524473da3f54055989d16d11f/mun.geojson"
 url_dataset = "https://raw.githubusercontent.com/mathe-u/datasets/refs/heads/main/vacinacao_piaui_ago_2024.csv"
 
 # Funções para carregar dados com cache
