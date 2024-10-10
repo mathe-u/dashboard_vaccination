@@ -11,7 +11,7 @@ st.set_page_config(layout='wide')
 st.title("Vacinação Piauí 2024")
 
 # URLs dos arquivos de dados
-url_json = "https://github.com/mathe-u/datasets/blob/5ff042980d5b956524473da3f54055989d16d11f/mun.geojson"
+url_json = "mun.geojson"
 url_dataset = "https://raw.githubusercontent.com/mathe-u/datasets/refs/heads/main/vacinacao_piaui_ago_2024.csv"
 
 # Funções para carregar dados com cache
@@ -36,6 +36,7 @@ def load_map(dataframe, geojson_data):
         data=dataframe,
         columns=['Código', 'Doses'],
         key_on='feature.properties.CD_MUN',
+        fill_color='YlGn'
     ).add_to(mapa_pi)
     return mapa_pi
 
@@ -74,6 +75,10 @@ nu_vacina_por_dia = df.groupby('dt_vacina').size().reset_index(name='Doses')
 municipio_vacinas = df['co_municipio_estabelecimento'].value_counts().reset_index()
 municipio_vacinas.columns = ['Código', 'Doses']
 municipio_vacinas['Código'] = municipio_vacinas['Código'].astype(str)
+#municipio_vacinas.loc[municipio_vacinas['Código'] == '221100', 'Doses'] = 83
+#municipio_vacinas.drop(municipio_vacinas['Código'] == '221100', inplace=True)
+#print(municipio_vacinas)
+
 
 # Layout da página
 col1, col2, col3, col4 = st.columns(4)
@@ -110,6 +115,7 @@ with col5:
 
 # Gráfico de barras - Doses por município
 with col6:
+    st.subheader("Doses por município")
     st_folium(load_map(municipio_vacinas, url_json))
     #fig5 = px.bar(
     #    municipio_vacinas.sort_values('Doses', ascending=False).head(10),
